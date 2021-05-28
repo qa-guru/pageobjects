@@ -2,9 +2,6 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
-import static com.codeborne.selenide.Condition.disappear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -22,7 +19,7 @@ public class StudentRegistrationFormWithCommentsTests extends TestBase {
             dayOfWeekOfBirth = "Friday",
             subject1 = "Chemistry",
             hobby1 = "Sports",
-            picture = "1.png",
+            picture = "img/1.png",
             currentAddress = "Montenegro 123",
             state = "Uttar Pradesh",
             city = "Merrut";
@@ -52,6 +49,8 @@ public class StudentRegistrationFormWithCommentsTests extends TestBase {
 //        String.format("hello %s %s", "SOME", "World") == "hello SOME World";
 //        $(String.format("[aria-label='Choose %s, %s %sth, %s']",
 //                dayOfWeekOfBirth, monthOfBirth, dayOfBirth, yearOfBirth)).click();
+//        $x(String.format("//*[contains(aria-label, '%s %sth, %s')]",
+//                monthOfBirth, dayOfBirth, yearOfBirth)).click();
 //        $("[aria-label='Choose Friday, May 27th, 1988']").click();
         $(String.format(".react-datepicker__day--0%s:not(.react-datepicker__day--outside-month)", dayOfBirth)).click();
         $("#subjectsInput").val(subject1).pressEnter();

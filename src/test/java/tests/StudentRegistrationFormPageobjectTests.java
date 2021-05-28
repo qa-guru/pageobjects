@@ -1,12 +1,14 @@
 package tests;
 
+import components.CalendarComponent;
 import org.junit.jupiter.api.Test;
+import pages.RegistrationPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class StudentRegistrationFormTests extends TestBase {
+public class StudentRegistrationFormPageobjectTests extends TestBase {
 
     String firstName = "Egor",
             lastName = "Alexov",
@@ -23,20 +25,28 @@ public class StudentRegistrationFormTests extends TestBase {
             state = "Uttar Pradesh",
             city = "Merrut";
 
+    RegistrationPage registrationPage = new RegistrationPage();
+
     @Test
     void successfulRegistrationTest() {
         open("https://demoqa.com/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
 
-        $("#firstName").val(firstName);
-        $("#lastName").val(lastName);
+//        $("#firstName").val(firstName);
+//        $("#lastName").val(lastName);
+        registrationPage.typeFirstName(firstName);
+        registrationPage.typeLastName(lastName);
+
         $("#userEmail").val(email);
         $("#genterWrapper").$(byText(gender)).click();
         $("#userNumber").val(mobile);
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption(monthOfBirth);
-        $(".react-datepicker__year-select").selectOption(yearOfBirth);
-        $(String.format(".react-datepicker__day--0%s:not(.react-datepicker__day--outside-month)", dayOfBirth)).click();
+
+//        $("#dateOfBirthInput").click();
+//        $(".react-datepicker__month-select").selectOption(monthOfBirth);
+//        $(".react-datepicker__year-select").selectOption(yearOfBirth);
+//        $(String.format(".react-datepicker__day--0%s:not(.react-datepicker__day--outside-month)", dayOfBirth)).click();
+        registrationPage.setDate(dayOfBirth, monthOfBirth, yearOfBirth);
+
         $("#subjectsInput").val(subject1).pressEnter();
         $("#hobbiesWrapper").$(byText(hobby1)).click();
         $("#uploadPicture").uploadFromClasspath("img/" + picture);
